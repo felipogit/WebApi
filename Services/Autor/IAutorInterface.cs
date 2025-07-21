@@ -1,4 +1,5 @@
-﻿using WebApi.Models;
+﻿using WebApi.Dto.Autor;
+using WebApi.Models;
 
 namespace WebApi.Services.Autor
 {
@@ -6,6 +7,7 @@ namespace WebApi.Services.Autor
     {
         Task<ResponseModel<List<AutorModel>>> ListarAutores();
         Task<ResponseModel<AutorModel>> BuscarAutorPorId(int idAutor);
-        Task<ResponseModel<AutorModel>> BuscarAutotLivro(int idLivro);
+        Task<ResponseModel<AutorModel>> BuscarAutorPorIdLivro(int idLivro);
+        Task<ResponseModel<List<AutorModel>>> CriarAutor(AutorCriaçãoDto autorCriaçãoDto);
     }
 }

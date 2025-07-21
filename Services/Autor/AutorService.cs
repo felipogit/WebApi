@@ -11,14 +11,57 @@ namespace WebApi.Services.Autor
         {
             _context = context;
         }
-        public Task<ResponseModel<AutorModel>> BuscarAutorPorId(int idAutor)
+        public async Task<ResponseModel<AutorModel>> BuscarAutorPorId(int idAutor)
         {
-            throw new NotImplementedException();
+            ResponseModel<AutorModel> resposta = new ResponseModel<AutorModel>();
+
+            try
+            {
+
+                var autor = await _context.Autores.FirstOrDefaultAsync(autorBanco => autorBanco.Id == idAutor);
+                if (autor == null)
+                {
+                    resposta.Mensagem = "Autor não encontrado.";
+                    return resposta;
+                }
+
+                resposta.Dados = autor; 
+                resposta.Mensagem = "Autor encontrado com sucesso.";
+                return resposta;
+            }
+            catch(Exception ex)
+            {
+                
+                resposta.Mensagem = ex.Message;
+                resposta.Status = false;
+                return resposta;
+            }
         }
 
-        public  Task<ResponseModel<AutorModel>> BuscarAutotLivro(int idLivro)
+        public  async Task<ResponseModel<AutorModel>> BuscarAutorPorIdLivro(int idLivro)
         {
-            throw new NotImplementedException();
+            ResponseModel<AutorModel> resposta = new ResponseModel<AutorModel>();
+            try
+            {
+                var livro = await _context.Livros.Include(a => a.Autor)
+                    .FirstOrDefaultAsync(livroBanco => livroBanco.Id == idLivro);
+                
+                if(livro == null)
+                {
+                    resposta.Mensagem = "Livro não encontrado.";
+                    return resposta;
+                }
+                resposta.Dados = livro.Autor;
+                resposta.Mensagem = "Autor do livro encontrado com sucesso.";
+                return resposta;
+            }
+            catch (Exception ex)
+            {
+
+                resposta.Mensagem = ex.Message;
+                resposta.Status = false;
+                return resposta;
+            }
         }
 
         public async Task<ResponseModel<List<AutorModel>>> ListarAutores()
