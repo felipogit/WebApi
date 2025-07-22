@@ -1,7 +1,8 @@
-﻿namespace WebApi.Dto.Autor
+﻿    namespace WebApi.Dto.Autor
 {
-    public class AutorCriaçãoDto
+    public class AutorCriacaoDto
     {
+        
         public string Name { get; set; }
         public string Sobrenome { get; set; }
     }

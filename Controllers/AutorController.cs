@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using WebApi.Dto.Autor;
 using WebApi.Models;
 using WebApi.Services.Autor;
 
@@ -38,6 +39,28 @@ namespace WebApi.Controllers
             var autor = await _autorInterface.BuscarAutorPorIdLivro(idLivro);
 
             return Ok(autor);
+        }
+
+        [HttpPost("CriarAutor")]
+        public async Task<ActionResult<ResponseModel <List<AutorModel>>>> CriarAutor(AutorCriacaoDto autorCriaçãoDto)
+        {
+            var newAutor = await _autorInterface.CriarAutor(autorCriaçãoDto);
+
+            return Ok(newAutor);
+        }
+
+        [HttpPut("EditarAutor")]
+        public async Task<ActionResult<ResponseModel<List<AutorModel>>>> EditarAutor(AutorEdicaoDto autorEdicaoDto)
+        {
+            var autores = await _autorInterface.EditarAutor(autorEdicaoDto);
+            return Ok(autores);
+        }
+
+        [HttpDelete("ExcluirAutor/{idAutor}")]
+        public async Task<ActionResult<ResponseModel<List<AutorModel>>>> ExcluirAutor(int idAutor)
+        {
+            var autores = await _autorInterface.ExcluirAutor(idAutor);
+            return Ok(autores);
         }
 
     }
