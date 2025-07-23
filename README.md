@@ -31,7 +31,7 @@ Ela permite **criar**, **editar**, **listar** e **deletar** registros de livros 
 
 ```bash
 git clone https://github.com/felipogit/WebApi.git
-cd nomedoprojeto
+cd WebApi
 ```
 
 > Ou baixe o `.zip` do projeto e extraia.
